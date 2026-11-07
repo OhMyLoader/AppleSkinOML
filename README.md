@@ -54,6 +54,9 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
   (the accessor cast, every server tick) and the HUD hooks (every frame) ran clean
 - [x] **HUD visually confirmed in-game** (2026-11-07): the hunger bar overlays — saturation,
   held-food restore, exhaustion underlay — render correctly on the real client
+- [x] **tooltip overlay visually confirmed in-game** (2026-11-07): the hunger/saturation icon rows
+  render on food tooltips
+- [x] **F3 food-stats line live** (2026-11-07): registered through the static accessor bridge, in-world run clean
 
 ## Findings fed back to the loader (AC-6)
 

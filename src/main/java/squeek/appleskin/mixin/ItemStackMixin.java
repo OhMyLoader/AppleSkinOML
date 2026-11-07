@@ -7,8 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.ohmyloader.api.hook.ModifyReturnValue;
-import org.ohmyloader.api.hook.Extra;
-import org.ohmyloader.api.hook.Hooked;
+import org.ohmyloader.api.hook.Merged;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
 import java.util.List;
@@ -16,19 +15,16 @@ import java.util.List;
 /**
  * The hook that offers the food overlay to every tooltip of every item: the RETURN-value modify runs
  * after the game has built its own lines, and the handler appends the overlay line in place. The
- * handler is merged into `ItemStack`, so `this` **is** the hovered stack (the Kotlin side reaches it
- * through a plain cast to the target type, which the merged body resolves against the instance).
+ * handler is merged into `ItemStack`, so `this` **is** the hovered stack.
+ *
+ * OML shape note: the merged `@ModifyReturnValue` handler receives only the return value — the
+ * game's `(context, player, flag)` arguments are not passed. The two that matter are reconstructed
+ * from the client itself: the hover path always uses the local player, and the flag it encodes is
+ * exactly the advanced-tooltips toggle (F3+H), read from the same option vanilla builds the flag
+ * from.
  */
-@Hooked(target = "net.minecraft.world.item.ItemStack")
+@Merged(target = "net.minecraft.world.item.ItemStack")
 public class ItemStackMixin {
-
-    /**
-     * Marks the mixin as **merge model** — without a merge-family member the scanner routes every
-     * handler through the generated bridge, where `this` is the mixin instance and the cast below
-     * throws ClassCastException (found by the first hover over an item).
-     */
-    @Extra
-    private boolean mergedModel = true;
 
     @ModifyReturnValue(
         method = "getTooltipLines",
