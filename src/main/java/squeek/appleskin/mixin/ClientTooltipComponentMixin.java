@@ -3,11 +3,11 @@ package squeek.appleskin.mixin;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import org.ohmyloader.api.mixin.At;
-import org.ohmyloader.api.mixin.Inject;
-import org.ohmyloader.api.mixin.Mixin;
-import org.ohmyloader.api.mixin.CallbackInfoReturnable;
-import org.ohmyloader.api.mixin.LocalCapture;
+import org.ohmyloader.api.hook.At;
+import org.ohmyloader.api.hook.Inject;
+import org.ohmyloader.api.hook.Hooked;
+import org.ohmyloader.api.hook.HookValue;
+import org.ohmyloader.api.hook.LocalCapture;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
 /**
@@ -19,16 +19,16 @@ import squeek.appleskin.client.TooltipOverlayHandler;
  * this mixin is an injection-only carrier (nothing to merge) and the handlers are static — the
  * engine dispatches them through the generated bridge with no receiver.
  */
-@Mixin(target = "net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent")
+@Hooked(target = "net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent")
 public class ClientTooltipComponentMixin {
 
     @Inject(
         method = "create",
         desc = "(Lnet/minecraft/util/FormattedCharSequence;)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipComponent;",
-        at = @At(value = At.HEAD), cancellable = true, require = 1,
+        at = @At(value = At.HEAD), cancelable = true, require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public static void appleskinOf(FormattedCharSequence text, CallbackInfoReturnable<ClientTooltipComponent> cir) {
+    public static void appleskinOf(FormattedCharSequence text, HookValue<ClientTooltipComponent> cir) {
         if (text instanceof TooltipOverlayHandler.FoodOverlayTextComponent) {
             cir.setReturnValue(((TooltipOverlayHandler.FoodOverlayTextComponent) text).getFoodOverlay());
         }
@@ -37,10 +37,10 @@ public class ClientTooltipComponentMixin {
     @Inject(
         method = "create",
         desc = "(Lnet/minecraft/world/inventory/tooltip/TooltipComponent;)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipComponent;",
-        at = @At(value = At.HEAD), cancellable = true, require = 1,
+        at = @At(value = At.HEAD), cancelable = true, require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public static void appleskinOfData(TooltipComponent data, CallbackInfoReturnable<ClientTooltipComponent> cir) {
+    public static void appleskinOfData(TooltipComponent data, HookValue<ClientTooltipComponent> cir) {
         if (data instanceof TooltipOverlayHandler.FoodOverlay) {
             cir.setReturnValue((ClientTooltipComponent) data);
         }

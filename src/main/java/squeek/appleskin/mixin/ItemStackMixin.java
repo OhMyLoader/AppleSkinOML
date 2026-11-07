@@ -6,9 +6,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import org.ohmyloader.api.mixin.ModifyReturnValue;
-import org.ohmyloader.api.mixin.Unique;
-import org.ohmyloader.api.mixin.Mixin;
+import org.ohmyloader.api.hook.ModifyReturnValue;
+import org.ohmyloader.api.hook.Extra;
+import org.ohmyloader.api.hook.Hooked;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * handler is merged into `ItemStack`, so `this` **is** the hovered stack (the Kotlin side reaches it
  * through a plain cast to the target type, which the merged body resolves against the instance).
  */
-@Mixin(target = "net.minecraft.world.item.ItemStack")
+@Hooked(target = "net.minecraft.world.item.ItemStack")
 public class ItemStackMixin {
 
     /**
@@ -27,7 +27,7 @@ public class ItemStackMixin {
      * handler through the generated bridge, where `this` is the mixin instance and the cast below
      * throws ClassCastException (found by the first hover over an item).
      */
-    @Unique
+    @Extra
     private boolean mergedModel = true;
 
     @ModifyReturnValue(

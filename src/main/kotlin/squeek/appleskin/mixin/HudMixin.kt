@@ -2,10 +2,10 @@ package squeek.appleskin.mixin
 
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.world.entity.player.Player
-import org.ohmyloader.api.mixin.At
-import org.ohmyloader.api.mixin.Inject
-import org.ohmyloader.api.mixin.LocalCapture
-import org.ohmyloader.api.mixin.Mixin
+import org.ohmyloader.api.hook.At
+import org.ohmyloader.api.hook.Inject
+import org.ohmyloader.api.hook.LocalCapture
+import org.ohmyloader.api.hook.Hooked
 import squeek.appleskin.client.HUDOverlayHandler
 
 /**
@@ -14,7 +14,7 @@ import squeek.appleskin.client.HUDOverlayHandler
  * and no OML event carries it. Descriptors are the 26.3 ones, pinned by the shape tests of the
  * loader engine (`require` turns a drift into a loud startup error, never a silent no-op).
  */
-@Mixin(target = "net.minecraft.client.gui.Hud")
+@Hooked(target = "net.minecraft.client.gui.Hud")
 class HudMixin {
 
     @Inject(
@@ -28,7 +28,7 @@ class HudMixin {
         player: Player,
         top: Int,
         right: Int,
-        ci: org.ohmyloader.api.mixin.CallbackInfo
+        ci: org.ohmyloader.api.hook.HookContext
     ) {
         HUDOverlayHandler.onPreRenderFood(context, player, top, right)
     }
@@ -44,7 +44,7 @@ class HudMixin {
         player: Player,
         top: Int,
         right: Int,
-        ci: org.ohmyloader.api.mixin.CallbackInfo
+        ci: org.ohmyloader.api.hook.HookContext
     ) {
         HUDOverlayHandler.onRenderFood(context, player, top, right)
     }
@@ -58,7 +58,7 @@ class HudMixin {
     fun renderHealthPost(
         context: GuiGraphicsExtractor, player: Player, left: Int, top: Int, lines: Int,
         regeneratingHeartIndex: Int, maxHealth: Float, lastHealth: Int, health: Int, absorption: Int,
-        blinking: Boolean, ci: org.ohmyloader.api.mixin.CallbackInfo,
+        blinking: Boolean, ci: org.ohmyloader.api.hook.HookContext,
     ) {
         HUDOverlayHandler.onRenderHealth(
             context, player, left, top, lines, regeneratingHeartIndex, maxHealth, lastHealth,

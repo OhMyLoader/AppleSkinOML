@@ -5,7 +5,7 @@ import squeek.appleskin.mixin.FoodDataAccessor
 
 /**
  * Exhaustion is a private field of `FoodData` that vanilla never syncs; the accessor mixin makes it
- * readable and writable. The Fabric branch reached it through a `@Shadow` mixin that implemented a
+ * readable and writable. The Fabric branch reached it through a `@Borrowed` mixin that implemented a
  * manipulator interface; on OML the accessor synthesis does the same in two abstract methods.
  */
 object ExhaustionHelper {
