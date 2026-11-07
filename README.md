@@ -40,7 +40,7 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
 - [x] HUD overlays (saturation / exhaustion / held-food hunger+saturation / estimated health)
 - [ ] F3 food-stats debug entry — blocked: 26.3's `DebugScreenEntries.register` is private and OML's
   accessor synthesis covers instance members only (the upstream branch calls the same private method)
-- [ ] tooltip overlay (food values on item tooltips)
+- [x] tooltip overlay (food values on item tooltips) — the two hooks are Java (the interface-static anchors need static handlers, and Kotlin companion delegates do not carry annotations); verified to boot and join a world clean, the visual hover check pending
 - [x] real-machine runs: a dedicated server boots with the mod loaded (config generated, mixin
   self-check green), and a client joined a world for a 60s in-window run — the sync path
   (the accessor cast, every server tick) and the HUD hooks (every frame) ran clean
