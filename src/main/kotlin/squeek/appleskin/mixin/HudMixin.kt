@@ -51,7 +51,7 @@ class HudMixin {
 
     @Inject(
         method = "extractHearts",
-        desc = "(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/world/entity/player/Player;IIIIIFFFIIIZ)V",
+        desc = "(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/world/entity/player/Player;IIIIFIIIZ)V",
         at = At(At.RETURN), require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD,
     )

@@ -40,4 +40,6 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
 - [x] HUD overlays (saturation / exhaustion / held-food hunger+saturation / estimated health)
 - [x] F3 food-stats debug entry
 - [ ] tooltip overlay (food values on item tooltips)
-- [ ] a real-machine gate run of both sides
+- [x] real-machine runs: a dedicated server boots with the mod loaded (config generated, mixin
+  self-check green), and a client joined a world for a 60s in-window run — the sync path
+  (the accessor cast, every server tick) and the HUD hooks (every frame) ran clean
