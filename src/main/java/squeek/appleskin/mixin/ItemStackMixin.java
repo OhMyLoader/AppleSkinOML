@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.ohmyloader.api.mixin.ModifyReturnValue;
+import org.ohmyloader.api.mixin.Unique;
 import org.ohmyloader.api.mixin.Mixin;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
@@ -20,6 +21,14 @@ import java.util.List;
  */
 @Mixin(target = "net.minecraft.world.item.ItemStack")
 public class ItemStackMixin {
+
+    /**
+     * Marks the mixin as **merge model** — without a merge-family member the scanner routes every
+     * handler through the generated bridge, where `this` is the mixin instance and the cast below
+     * throws ClassCastException (found by the first hover over an item).
+     */
+    @Unique
+    private boolean mergedModel = true;
 
     @ModifyReturnValue(
         method = "getTooltipLines",

@@ -40,7 +40,15 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
 - [x] HUD overlays (saturation / exhaustion / held-food hunger+saturation / estimated health)
 - [ ] F3 food-stats debug entry — blocked: 26.3's `DebugScreenEntries.register` is private and OML's
   accessor synthesis covers instance members only (the upstream branch calls the same private method)
-- [x] tooltip overlay (food values on item tooltips) — the two hooks are Java (the interface-static anchors need static handlers, and Kotlin companion delegates do not carry annotations); verified to boot and join a world clean, the visual hover check pending
+- [x] tooltip overlay (food values on item tooltips) — visually confirmed in-game (2026-11-07): hunger/saturation icon rows render on food tooltips
+
+## Findings fed back to the loader (AC-6), continued
+
+5. **Merge model is opt-in per mixin class** — a mixin without a merge-family member routes all
+   handlers through the bridge, where `this` is the mixin instance; a handler casting `this` to the
+   target type crashes on first use (found on the first tooltip hover). The fix is a ``
+   marker field; the scanner's classification deserves a doc paragraph and possibly a startup
+   warning when a bridge-model handler casts `this`.
 - [x] real-machine runs: a dedicated server boots with the mod loaded (config generated, mixin
   self-check green), and a client joined a world for a 60s in-window run — the sync path
   (the accessor cast, every server tick) and the HUD hooks (every frame) ran clean
