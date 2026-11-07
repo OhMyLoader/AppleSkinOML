@@ -38,8 +38,22 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
 
 - [x] entry, config, network sync, server tracking (event-anchored, mixin-free)
 - [x] HUD overlays (saturation / exhaustion / held-food hunger+saturation / estimated health)
-- [x] F3 food-stats debug entry
+- [ ] F3 food-stats debug entry — blocked: 26.3's `DebugScreenEntries.register` is private and OML's
+  accessor synthesis covers instance members only (the upstream branch calls the same private method)
 - [ ] tooltip overlay (food values on item tooltips)
 - [x] real-machine runs: a dedicated server boots with the mod loaded (config generated, mixin
   self-check green), and a client joined a world for a 60s in-window run — the sync path
   (the accessor cast, every server tick) and the HUD hooks (every frame) ran clean
+
+## Findings fed back to the loader (AC-6)
+
+1. **`@Accessor` synthesis did not declare the mixin interface on the target class** — the methods
+   existed, but a mod's typed cast threw `ClassCastException` on the first in-world tick. Fixed in
+   the loader (`ClassMerger`, with a test); this port is the reason it was found.
+2. **Handler capture parameters require an explicit `LocalCapture`** — the mixin self-check rejects
+   a capturing handler without `locals = LocalCapture.CAPTURE_FAILHARD` at startup, by name.
+3. **Injection descriptors are pinned exactly** — a one-character drift in `extractHearts`'s
+   descriptor produced a startup `InjectionError` naming the actual shape; the client-only crash
+   surfaced what a server boot cannot (the server never loads `Hud`).
+4. The Zulu-27 window-creation `0xC0000005` (known; the build file carries the
+   `-XX:TieredStopAtLevel=1` workaround the verification mod uses).
