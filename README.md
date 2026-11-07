@@ -44,6 +44,8 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
 - [x] real-machine runs: a dedicated server boots with the mod loaded (config generated, mixin
   self-check green), and a client joined a world for a 60s in-window run — the sync path
   (the accessor cast, every server tick) and the HUD hooks (every frame) ran clean
+- [x] **HUD visually confirmed in-game** (2026-11-07): the hunger bar overlays — saturation,
+  held-food restore, exhaustion underlay — render correctly on the real client
 
 ## Findings fed back to the loader (AC-6)
 
