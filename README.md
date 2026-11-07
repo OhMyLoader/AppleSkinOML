@@ -38,8 +38,6 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
 
 - [x] entry, config, network sync, server tracking (event-anchored, mixin-free)
 - [x] HUD overlays (saturation / exhaustion / held-food hunger+saturation / estimated health)
-- [ ] F3 food-stats debug entry — blocked: 26.3's `DebugScreenEntries.register` is private and OML's
-  accessor synthesis covers instance members only (the upstream branch calls the same private method)
 - [x] tooltip overlay (food values on item tooltips) — visually confirmed in-game (2026-11-07): hunger/saturation icon rows render on food tooltips
 
 ## Findings fed back to the loader (AC-6), continued
