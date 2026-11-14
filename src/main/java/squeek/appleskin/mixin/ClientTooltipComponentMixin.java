@@ -25,7 +25,7 @@ public class ClientTooltipComponentMixin {
     @Inject(
         method = "create",
         desc = "(Lnet/minecraft/util/FormattedCharSequence;)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipComponent;",
-        at = @At(value = At.HEAD), cancelable = true, require = 1,
+        at = {@At(value = At.HEAD)}, cancelable = true, require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD
     )
     public static void appleskinOf(FormattedCharSequence text, HookValue<ClientTooltipComponent> cir) {
@@ -37,7 +37,7 @@ public class ClientTooltipComponentMixin {
     @Inject(
         method = "create",
         desc = "(Lnet/minecraft/world/inventory/tooltip/TooltipComponent;)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipComponent;",
-        at = @At(value = At.HEAD), cancelable = true, require = 1,
+        at = {@At(value = At.HEAD)}, cancelable = true, require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD
     )
     public static void appleskinOfData(TooltipComponent data, HookValue<ClientTooltipComponent> cir) {

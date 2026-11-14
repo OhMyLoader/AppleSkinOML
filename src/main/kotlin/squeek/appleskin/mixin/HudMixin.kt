@@ -20,7 +20,7 @@ class HudMixin {
     @Inject(
         method = "extractFood",
         desc = "(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/world/entity/player/Player;II)V",
-        at = At(At.HEAD), require = 1,
+        at = [At(At.HEAD)], require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD,
     )
     fun renderFoodPre(
@@ -36,7 +36,7 @@ class HudMixin {
     @Inject(
         method = "extractFood",
         desc = "(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/world/entity/player/Player;II)V",
-        at = At(At.RETURN), require = 1,
+        at = [At(At.RETURN)], require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD,
     )
     fun renderFoodPost(
@@ -52,7 +52,7 @@ class HudMixin {
     @Inject(
         method = "extractHearts",
         desc = "(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/world/entity/player/Player;IIIIFIIIZ)V",
-        at = At(At.RETURN), require = 1,
+        at = [At(At.RETURN)], require = 1,
         locals = LocalCapture.CAPTURE_FAILHARD,
     )
     fun renderHealthPost(
