@@ -3,11 +3,11 @@ package squeek.appleskin.mixin;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import org.ohmyloader.api.hook.At;
-import org.ohmyloader.api.hook.Inject;
-import org.ohmyloader.api.hook.Hooked;
-import org.ohmyloader.api.hook.HookValue;
-import org.ohmyloader.api.hook.LocalCapture;
+import org.ohmyloader.api.core.hook.At;
+import org.ohmyloader.api.core.hook.Inject;
+import org.ohmyloader.api.core.hook.Hooked;
+import org.ohmyloader.api.core.hook.HookValue;
+import org.ohmyloader.api.core.hook.LocalCapture;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
 /**

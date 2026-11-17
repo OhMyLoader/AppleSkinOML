@@ -1,11 +1,11 @@
 package squeek.appleskin
 
-import org.ohmyloader.api.Mod
-import org.ohmyloader.api.ModContext
-import org.ohmyloader.api.OMLModInitializer
-import org.ohmyloader.api.network.OMLNetworkProvider
-import org.ohmyloader.api.network.OMLNetworkRegistry
-import org.ohmyloader.api.game.event.Events
+import org.ohmyloader.api.core.Mod
+import org.ohmyloader.api.core.ModContext
+import org.ohmyloader.api.core.OMLModInitializer
+import org.ohmyloader.api.core.network.OMLNetworkProvider
+import org.ohmyloader.api.core.network.OMLNetworkRegistry
+import org.ohmyloader.api.event.Events
 import squeek.appleskin.client.HUDOverlayHandler
 import squeek.appleskin.network.SyncHandler
 import squeek.appleskin.network.SyncPayloads

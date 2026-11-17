@@ -1,10 +1,10 @@
 package squeek.appleskin.network
 
-import org.ohmyloader.api.network.OMLNetworkRegistry
-import org.ohmyloader.api.network.OMLPayloadType
-import org.ohmyloader.api.network.codec
-import org.ohmyloader.api.tick.OMLScheduler
-import org.ohmyloader.api.game.OMLGame
+import org.ohmyloader.api.core.network.OMLNetworkRegistry
+import org.ohmyloader.api.core.network.OMLPayloadType
+import org.ohmyloader.api.core.network.codec
+import org.ohmyloader.api.core.tick.OMLScheduler
+import org.ohmyloader.api.OMLGame
 import squeek.appleskin.helpers.ExhaustionHelper
 
 /** The server's current saturation value for the receiving player. */

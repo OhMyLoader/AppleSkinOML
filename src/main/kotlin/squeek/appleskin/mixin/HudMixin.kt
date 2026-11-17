@@ -2,10 +2,10 @@ package squeek.appleskin.mixin
 
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.world.entity.player.Player
-import org.ohmyloader.api.hook.At
-import org.ohmyloader.api.hook.Inject
-import org.ohmyloader.api.hook.LocalCapture
-import org.ohmyloader.api.hook.Hooked
+import org.ohmyloader.api.core.hook.At
+import org.ohmyloader.api.core.hook.Inject
+import org.ohmyloader.api.core.hook.LocalCapture
+import org.ohmyloader.api.core.hook.Hooked
 import squeek.appleskin.client.HUDOverlayHandler
 
 /**
@@ -28,7 +28,7 @@ class HudMixin {
         player: Player,
         top: Int,
         right: Int,
-        ci: org.ohmyloader.api.hook.HookContext
+        ci: org.ohmyloader.api.core.hook.HookContext
     ) {
         HUDOverlayHandler.onPreRenderFood(context, player, top, right)
     }
@@ -44,7 +44,7 @@ class HudMixin {
         player: Player,
         top: Int,
         right: Int,
-        ci: org.ohmyloader.api.hook.HookContext
+        ci: org.ohmyloader.api.core.hook.HookContext
     ) {
         HUDOverlayHandler.onRenderFood(context, player, top, right)
     }
@@ -58,7 +58,7 @@ class HudMixin {
     fun renderHealthPost(
         context: GuiGraphicsExtractor, player: Player, left: Int, top: Int, lines: Int,
         regeneratingHeartIndex: Int, maxHealth: Float, lastHealth: Int, health: Int, absorption: Int,
-        blinking: Boolean, ci: org.ohmyloader.api.hook.HookContext,
+        blinking: Boolean, ci: org.ohmyloader.api.core.hook.HookContext,
     ) {
         HUDOverlayHandler.onRenderHealth(
             context, player, left, top, lines, regeneratingHeartIndex, maxHealth, lastHealth,

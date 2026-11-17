@@ -1,6 +1,6 @@
 package squeek.appleskin
 
-import org.ohmyloader.api.config.OMLConfig
+import org.ohmyloader.api.core.config.OMLConfig
 
 /**
  * The mod config, declared through the loader's TOML config instead of jankson + cloth-config

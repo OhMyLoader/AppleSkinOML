@@ -1,7 +1,7 @@
 package squeek.appleskin.mixin
 
-import org.ohmyloader.api.hook.FieldAccess
-import org.ohmyloader.api.hook.Hooked
+import org.ohmyloader.api.core.hook.FieldAccess
+import org.ohmyloader.api.core.hook.Hooked
 
 /**
  * Synthesized accessors for `FoodData`'s private `exhaustionLevel` — the one piece of the sync the

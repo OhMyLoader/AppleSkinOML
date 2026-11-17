@@ -3,8 +3,8 @@ package squeek.appleskin.network
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.level.gamerules.GameRules
-import org.ohmyloader.api.network.OMLNetwork
-import org.ohmyloader.api.game.event.Events
+import org.ohmyloader.api.core.network.OMLNetwork
+import org.ohmyloader.api.event.Events
 import squeek.appleskin.helpers.ExhaustionHelper
 import java.util.*
 import kotlin.math.abs

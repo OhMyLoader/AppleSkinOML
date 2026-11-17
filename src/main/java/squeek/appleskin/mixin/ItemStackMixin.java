@@ -6,8 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import org.ohmyloader.api.hook.ModifyReturnValue;
-import org.ohmyloader.api.hook.Merged;
+import org.ohmyloader.api.core.hook.ModifyReturnValue;
+import org.ohmyloader.api.core.hook.Merged;
 import squeek.appleskin.client.TooltipOverlayHandler;
 
 import java.util.List;
