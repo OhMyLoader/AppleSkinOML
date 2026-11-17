@@ -4,7 +4,7 @@ import org.ohmyloader.api.network.OMLNetworkRegistry
 import org.ohmyloader.api.network.OMLPayloadType
 import org.ohmyloader.api.network.codec
 import org.ohmyloader.api.tick.OMLScheduler
-import org.ohmyloader.api26_3.OMLGame
+import org.ohmyloader.api.game.OMLGame
 import squeek.appleskin.helpers.ExhaustionHelper
 
 /** The server's current saturation value for the receiving player. */

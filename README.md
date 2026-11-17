@@ -1,10 +1,10 @@
 # AppleSkinOML
 
 [AppleSkin](https://github.com/squeek502/AppleSkin) (by squeek502, Unlicense) ported to
-[OML](https://github.com/OhMyLoader/OhMyLoader) — the food/hunger HUD overlays, the
-server→client sync of saturation, exhaustion and the natural-regeneration rule, and the F3
-food-stats debug line. Source of record for the port is the `26.3-fabric` branch; this is the
-AC-6 migration measure of the loader's development plan.
+[OML](https://github.com/OhMyLoader/OhMyLoader) — the food/hunger HUD overlays and the
+server→client sync of saturation, exhaustion and the natural-regeneration rule. The tree targets
+`26.4-snapshot-8` (from `gradle.properties`); source of record for the port is the `26.3-fabric`
+branch, and the AC-6 migration measure of the loader's development plan.
 
 ## Running it
 
@@ -54,7 +54,8 @@ Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included
   held-food restore, exhaustion underlay — render correctly on the real client
 - [x] **tooltip overlay visually confirmed in-game** (2026-11-07): the hunger/saturation icon rows
   render on food tooltips
-- [x] **F3 food-stats line live** (2026-11-07): registered through the static accessor bridge, in-world run clean
+- [x] **F3 food-stats line** — available on 26.3; **not ported to 26.4**, where debug entries live
+  in a client registry behind an immutable profile table built during the game's static init.
 
 ## Findings fed back to the loader (AC-6)
 

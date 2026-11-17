@@ -3,7 +3,7 @@ package squeek.appleskin.client
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
-import net.minecraft.client.renderer.RenderPipelines
+import net.minecraft.client.gui.GuiPipeline
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.ComponentContents
@@ -198,26 +198,26 @@ object TooltipOverlayHandler {
 
         var i = 0
         while (i < foodOverlay.hungerBars * 2) {
-            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TextureHelper.FOOD_EMPTY_TEXTURE, x, y, 9, 9)
+            graphics.blitSprite(GuiPipeline.TEXTURED, TextureHelper.FOOD_EMPTY_TEXTURE, x, y, 9, 9)
 
             val outline = FoodOutline.get(modifiedFoodHunger, defaultFoodHunger, i)
             if (outline != FoodOutline.NORMAL) {
                 graphics.blitSprite(
-                    RenderPipelines.GUI_TEXTURED, TextureHelper.HUNGER_OUTLINE_SPRITE, x, y, 9, 9, outline.argb(),
+                    GuiPipeline.TEXTURED, TextureHelper.HUNGER_OUTLINE_SPRITE, x, y, 9, 9, outline.argb(),
                 )
             }
 
             val isDefaultHalf = defaultFoodHunger - 1 == i
             val defaultFoodIcon = TextureHelper.getFoodTexture(isRotten, if (isDefaultHalf) FoodType.HALF else FoodType.FULL)
             graphics.blitSprite(
-                RenderPipelines.GUI_TEXTURED, defaultFoodIcon, x, y, 9, 9,
+                GuiPipeline.TEXTURED, defaultFoodIcon, x, y, 9, 9,
                 ColorHelper.argbFromRGBA(1.0f, 1.0f, 1.0f, 0.25f),
             )
 
             if (modifiedFoodHunger > i) {
                 val isModifiedHalf = modifiedFoodHunger - 1 == i
                 val modifiedFoodIcon = TextureHelper.getFoodTexture(isRotten, if (isModifiedHalf) FoodType.HALF else FoodType.FULL)
-                graphics.blitSprite(RenderPipelines.GUI_TEXTURED, modifiedFoodIcon, x, y, 9, 9)
+                graphics.blitSprite(GuiPipeline.TEXTURED, modifiedFoodIcon, x, y, 9, 9)
             }
 
             x -= 9
@@ -250,7 +250,7 @@ object TooltipOverlayHandler {
                 if (shouldBeFaded) ColorHelper.argbFromRGBA(1.0f, 1.0f, 1.0f, 0.5f)
                 else ColorHelper.argbFromRGBA(1.0f, 1.0f, 1.0f, 1.0f)
             graphics.blit(
-                RenderPipelines.GUI_TEXTURED, TextureHelper.MOD_ICONS, x, y,
+                GuiPipeline.TEXTURED, TextureHelper.MOD_ICONS, x, y,
                 (if (effectiveSaturationOfBar >= 1) 21 else if (effectiveSaturationOfBar > 0.5) 14 else if (effectiveSaturationOfBar > 0.25) 7 else if (effectiveSaturationOfBar > 0) 0 else 28).toFloat(),
                 (if (modifiedSaturationIncrement >= 0) 27 else 34).toFloat(),
                 7, 7, 256, 256, color,

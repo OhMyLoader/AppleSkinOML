@@ -69,7 +69,9 @@ object FoodHelper {
     }
 
     fun getEstimatedHealthIncrement(player: Player, consumableFood: ConsumableFood): Float {
-        if (!player.isHurt) return 0f
+        // 26.4 dropped `isHurt()`; the question is the same one — food only adds health when the
+        // player is below full health.
+        if (player.health >= player.maxHealth) return 0f
 
         val stats: FoodData = player.foodData
 

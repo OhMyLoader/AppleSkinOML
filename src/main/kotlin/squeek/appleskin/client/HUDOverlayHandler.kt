@@ -2,7 +2,7 @@ package squeek.appleskin.client
 
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphicsExtractor
-import net.minecraft.client.renderer.RenderPipelines
+import net.minecraft.client.gui.GuiPipeline
 import net.minecraft.world.Difficulty
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.player.Player
@@ -194,7 +194,7 @@ object HUDOverlayHandler {
             else if (effectiveSaturationOfBar > .25) u = 1 * iconSize
 
             context.blit(
-                RenderPipelines.GUI_TEXTURED, TextureHelper.MOD_ICONS, x, y, u.toFloat(), v.toFloat(),
+                GuiPipeline.TEXTURED, TextureHelper.MOD_ICONS, x, y, u.toFloat(), v.toFloat(),
                 iconSize, iconSize, 256, 256, alphaColor,
             )
         }
@@ -227,13 +227,13 @@ object HUDOverlayHandler {
 
             // very faint background
             val bgColor = ColorHelper.argbFromRGBA(1.0f, 1.0f, 1.0f, alpha * 0.25f)
-            context.blitSprite(RenderPipelines.GUI_TEXTURED, backgroundSprite, x, y, iconSize, iconSize, bgColor)
+            context.blitSprite(GuiPipeline.TEXTURED, backgroundSprite, x, y, iconSize, iconSize, bgColor)
 
             val isHalf = i * 2 + 1 == modifiedFood
             val iconSprite =
                 TextureHelper.getFoodTexture(useRottenTextures, if (isHalf) FoodType.HALF else FoodType.FULL)
 
-            context.blitSprite(RenderPipelines.GUI_TEXTURED, iconSprite, x, y, iconSize, iconSize, alphaColor)
+            context.blitSprite(GuiPipeline.TEXTURED, iconSprite, x, y, iconSize, iconSize, alphaColor)
         }
     }
 
@@ -266,12 +266,12 @@ object HUDOverlayHandler {
 
             // very faint background
             val bgColor = ColorHelper.argbFromRGBA(1.0f, 1.0f, 1.0f, alpha * 0.25f)
-            context.blitSprite(RenderPipelines.GUI_TEXTURED, backgroundSprite, x, y, iconSize, iconSize, bgColor)
+            context.blitSprite(GuiPipeline.TEXTURED, backgroundSprite, x, y, iconSize, iconSize, bgColor)
 
             val isHalf = i * 2 + 1 == fixedModifiedHealth
             val iconSprite = TextureHelper.getHeartTexture(isHardcore, if (isHalf) HeartType.HALF else HeartType.FULL)
 
-            context.blitSprite(RenderPipelines.GUI_TEXTURED, iconSprite, x, y, iconSize, iconSize, alphaColor)
+            context.blitSprite(GuiPipeline.TEXTURED, iconSprite, x, y, iconSize, iconSize, alphaColor)
         }
     }
 
@@ -284,7 +284,7 @@ object HUDOverlayHandler {
 
         val color = ColorHelper.argbFromRGBA(1.0f, 1.0f, 1.0f, 0.75f)
         context.blit(
-            RenderPipelines.GUI_TEXTURED, TextureHelper.MOD_ICONS, right - width, top,
+            GuiPipeline.TEXTURED, TextureHelper.MOD_ICONS, right - width, top,
             (81 - width).toFloat(), 18f, width, height, 256, 256, color,
         )
     }

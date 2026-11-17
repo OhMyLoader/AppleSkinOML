@@ -5,10 +5,8 @@ import org.ohmyloader.api.ModContext
 import org.ohmyloader.api.OMLModInitializer
 import org.ohmyloader.api.network.OMLNetworkProvider
 import org.ohmyloader.api.network.OMLNetworkRegistry
-import org.ohmyloader.api26_3.event.Events
-import squeek.appleskin.client.DebugInfoHudEntry
+import org.ohmyloader.api.game.event.Events
 import squeek.appleskin.client.HUDOverlayHandler
-import squeek.appleskin.mixin.DebugScreenEntriesAccess
 import squeek.appleskin.network.SyncHandler
 import squeek.appleskin.network.SyncPayloads
 
@@ -36,9 +34,9 @@ class AppleSkinMod : OMLModInitializer, OMLNetworkProvider {
         HUDOverlayHandler.init()
         // The flash alpha drives the held-food overlays; only the client ticks it.
         Events.CLIENT_TICK.register { HUDOverlayHandler.onClientTick() }
-        // The F3 food-stats line: `register` is private in the game; the static accessor bridge
-        // (DebugScreenEntriesAccess) reaches the synthesis the engine planted there.
-        DebugScreenEntriesAccess.register(DebugInfoHudEntry.ENTRY_ID, DebugInfoHudEntry())
+        // The F3 food-stats line is not ported to 26.4: debug entries now live in a client registry
+        // whose profile table is an immutable map built in the game's static init, so a late
+        // registration has nowhere to appear.
     }
 
     override fun declareNetwork(network: OMLNetworkRegistry) {
