@@ -3,7 +3,7 @@
 [AppleSkin](https://github.com/squeek502/AppleSkin) (by squeek502, Unlicense) ported to
 [OML](https://github.com/OhMyLoader/OhMyLoader) — the food/hunger HUD overlays and the
 server→client sync of saturation, exhaustion and the natural-regeneration rule. The tree targets
-`26.4-snapshot-9` (from `gradle.properties`); source of record for the port is the `26.3-fabric`
+`26.4-snapshot-10` (from `gradle.properties`); source of record for the port is the `26.3-fabric`
 branch, and the AC-6 migration measure of the loader's development plan.
 
 ## Running it
