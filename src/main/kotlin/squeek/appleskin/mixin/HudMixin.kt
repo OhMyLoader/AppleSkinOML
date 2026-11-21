@@ -11,7 +11,7 @@ import squeek.appleskin.client.HUDOverlayHandler
 /**
  * The one mixin the HUD overlays cannot live without: the exact bar geometry (the food bar's
  * top/right and the hearts' full parameter list) exists only at these two `Hud` extraction passes,
- * and no OML event carries it. Descriptors are the 26.3 ones, pinned by the shape tests of the
+ * and no OML event carries it. Descriptors are the tracked game's, pinned by the shape tests of the
  * loader engine (`require` turns a drift into a loud startup error, never a silent no-op).
  */
 @Hooked(target = "net.minecraft.client.gui.Hud")

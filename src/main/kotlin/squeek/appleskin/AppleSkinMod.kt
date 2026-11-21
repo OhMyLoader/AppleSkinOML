@@ -19,11 +19,11 @@ import squeek.appleskin.network.SyncPayloads
  * - `ServerPlayerMixin.tick` / `PlayerListMixin.placeNewPlayer` / `MinecraftMixin.tick` → the OML
  *   events `LEVEL_TICK` / `PLAYER_JOINED` / `CLIENT_TICK` anchored at the same game sites
  * - `PayloadTypeRegistry` + `ServerPlayNetworking` / `ClientPlayNetworking` → `OMLNetwork`
- * - jankson config + cloth-config screens → the loader's TOML config (no GUI — see README)
+ * - jankson config + cloth-config screens → the loader's TOML config (no config GUI)
  * - `HudMixin` and the `FoodData` internals stay mixins: no OML event carries the HUD bar
  *   coordinates, and exhaustion is a private field
  *
- * Not ported (see README): the REI/JEI/ModMenu integrations and the tooltip overlay.
+ * Not ported: the REI/JEI/ModMenu integrations.
  */
 @Mod(id = "appleskin", name = "AppleSkin", version = "0.1.0")
 class AppleSkinMod : OMLModInitializer, OMLNetworkProvider {
