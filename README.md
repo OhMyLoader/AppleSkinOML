@@ -1,71 +1,17 @@
 # AppleSkinOML
 
-[AppleSkin](https://github.com/squeek502/AppleSkin) (by squeek502, Unlicense) ported to
-[OML](https://github.com/OhMyLoader/OhMyLoader) — the food/hunger HUD overlays and the
-server→client sync of saturation, exhaustion and the natural-regeneration rule. The tree targets
-`26.4-snapshot-10` (from `gradle.properties`); source of record for the port is the `26.3-fabric`
-branch, and the AC-6 migration measure of the loader's development plan.
-
-## Running it
+The AppleSkin mod (by squeek502, Unlicense) ported to
+[OhMyLoader](https://github.com/OhMyLoader/OhMyLoader) — the food/hunger HUD overlays and the
+server→client sync of saturation, exhaustion, and the natural-regeneration rule.
 
 ```sh
 gradlew runClient        # a normal OML dev client; build with `gradlew build`
 ```
 
-The project consumes `org.ohmyloader:*` and the `org.ohmyloader.gradle` plugin from Maven only
-(`oml_version` in `gradle.properties`); publish the loader with `gradlew publishToMavenLocal`
-first, like any third-party mod project.
+The project consumes `org.ohmyloader:*` through the OML Gradle plugin like any third-party mod
+project; publish the loader to the local Maven repository first when its API changed (see
+[CONTRIBUTING.md](CONTRIBUTING.md)).
 
-## What changed relative to the Fabric branch
+## License
 
-| Fabric surface | OML replacement |
-|---|---|
-| `main` + `client` entrypoints | one `@Mod` class; side-specific work rides the side's own events |
-| `PayloadTypeRegistry` + `ServerPlayNetworking` / `ClientPlayNetworking` | `OMLPayloadType` + `OMLNetwork.sendToPlayer` + `serverToClient` receivers; the main-thread hop is `OMLScheduler.client.schedule` |
-| `ServerPlayerMixin` (per-player tick) | `Events.LEVEL_TICK` iterating the level's players — same site, same cadence, no mixin |
-| `PlayerListMixin` (`placeNewPlayer` tail) | `Events.PLAYER_JOINED` — the OML event is anchored at that exact tail |
-| `MinecraftMixin` (per-tick alpha flash) | `Events.CLIENT_TICK` |
-| `HudMixin` (`extractFood` / `extractHearts` geometry) | **stays a mixin** — OML's `@Mixin`/`@Inject` with the 26.3 descriptors pinned and `require = 1`; no OML event carries the bar coordinates |
-| `FoodDataMixin` (`@Shadow` + manipulator interface) | an `@Accessor` interface mixin synthesizing getters/setters for the private `exhaustionLevel` |
-| jankson config + cloth-config screens | the loader's TOML config (`config/appleskin.toml`); entries and comments are the upstream ones. **No config GUI** — the loader has no screen framework for it yet |
-| fabric-api `Event<T>` behind the `AppleSkinApi` events | a small array-backed listener list with the same `EventHandler` shape |
-| REI / JEI / ModMenu integrations | **not ported** — other-loader interop |
-| tooltip overlay (`TooltipOverlayHandler` + `ItemStackMixin` + `ClientTooltipComponentMixin`) | **not ported yet** — the tooltip hook rides interface-static mixins, the most exotic shape in the mod; planned as the next batch |
-
-Assets (textures, lang files) are carried over unchanged, `pack.mcmeta` included.
-
-## Status
-
-- [x] entry, config, network sync, server tracking (event-anchored, mixin-free)
-- [x] HUD overlays (saturation / exhaustion / held-food hunger+saturation / estimated health)
-- [x] tooltip overlay (food values on item tooltips) — visually confirmed in-game (2026-11-07): hunger/saturation icon rows render on food tooltips
-
-## Findings fed back to the loader (AC-6), continued
-
-5. **Merge model is opt-in per mixin class** — a mixin without a merge-family member routes all
-   handlers through the bridge, where `this` is the mixin instance; a handler casting `this` to the
-   target type crashes on first use (found on the first tooltip hover). The fix is a ``
-   marker field; the scanner's classification deserves a doc paragraph and possibly a startup
-   warning when a bridge-model handler casts `this`.
-- [x] real-machine runs: a dedicated server boots with the mod loaded (config generated, mixin
-  self-check green), and a client joined a world for a 60s in-window run — the sync path
-  (the accessor cast, every server tick) and the HUD hooks (every frame) ran clean
-- [x] **HUD visually confirmed in-game** (2026-11-07): the hunger bar overlays — saturation,
-  held-food restore, exhaustion underlay — render correctly on the real client
-- [x] **tooltip overlay visually confirmed in-game** (2026-11-07): the hunger/saturation icon rows
-  render on food tooltips
-- [x] **F3 food-stats line** — available on 26.3; **not ported to 26.4**, where debug entries live
-  in a client registry behind an immutable profile table built during the game's static init.
-
-## Findings fed back to the loader (AC-6)
-
-1. **`@Accessor` synthesis did not declare the mixin interface on the target class** — the methods
-   existed, but a mod's typed cast threw `ClassCastException` on the first in-world tick. Fixed in
-   the loader (`ClassMerger`, with a test); this port is the reason it was found.
-2. **Handler capture parameters require an explicit `LocalCapture`** — the mixin self-check rejects
-   a capturing handler without `locals = LocalCapture.CAPTURE_FAILHARD` at startup, by name.
-3. **Injection descriptors are pinned exactly** — a one-character drift in `extractHearts`'s
-   descriptor produced a startup `InjectionError` naming the actual shape; the client-only crash
-   surfaced what a server boot cannot (the server never loads `Hud`).
-4. The Zulu-27 window-creation `0xC0000005` (known; the build file carries the
-   `-XX:TieredStopAtLevel=1` workaround the verification mod uses).
+Upstream AppleSkin is Unlicense. This repository has no separate license file yet.
